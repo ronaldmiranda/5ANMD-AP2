@@ -9,7 +9,7 @@
       <div class="col-4">
         <ul *ngFor="let airplane of airplanes">
           <li class="list-group-item">
-            <span class="d-block">{{ airplane | json}}</span>
+            <span class="d-block"> ✈ {{ airplane | json}}</span>
           </li>
         </ul>
       </div>
@@ -17,7 +17,16 @@
 
   </div>
 
-  <div class="col-6">
-    <span>Total de aviões: {{totalAirplanes.length}}</span>
+  <div class="col-6" *ngIf="totalAirplanes && totalAirplanes.length">
+    <span>Total de aviões:</span>
+    <div class="p-2">
+      <div class="col-4">
+        <ul *ngFor="let airplane of totalAirplanes">
+          <li class="list-group-item">
+            <span class="d-block"> ✈ {{ airplane | json}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // Ini
     this.gates.forEach(gate => gate.airplane = new Airplane({ timeGeral: new Date() }));
   }
 
@@ -34,45 +33,44 @@ export class AppComponent implements OnInit {
 
     setTimeout(() => {
       setInterval(() => {
-        const airplane = new Airplane();
-        this.checkIfGateIsAvailable(airplane);
-
+        this.checkIfGateIsAvailable(new Airplane());
       }, 1000);
     }, 5000);
 
     const int = setInterval(() => {
-      this.airplanes.push(Object.assign(new Airplane({
+      this.airplanes.push(new Airplane({
         id: cont,
         timeGeral: new Date()
-      })));
+      }));
 
       cont++;
+
       if (cont === r) {
         clearInterval(int);
       }
+
     }, 1000);
   }
 
   private checkIfGateIsAvailable(airplane: Airplane) {
     this.gates.forEach(gate => {
       if (gate.state) {
-        this.putAirplaneIntoAGate(gate, airplane);
+        gate.airplane.landing = new Date();
+        this.putAirplaneIntoAGate(gate);
       }
     });
   }
 
-  private putAirplaneIntoAGate(gate: any, airplaneToGate: Airplane) {
+  private putAirplaneIntoAGate(gate: Gate) {
 
     const r = Math.floor(Math.random() * 10) + 5;
 
     setTimeout(() => {
       const airplane = this.airplanes.filter((v, i) => i === 0)[0];
       this.airplanes = this.airplanes.filter((v, i) => i !== 0);
-
-      gate.airplane = airplaneToGate;
       gate.state = false;
 
-      const r2 = Math.floor(Math.random() * 10) + 21;
+      const r2 = Math.floor(Math.random() * 10) + 5;
 
 
       setTimeout(() => {
@@ -83,7 +81,11 @@ export class AppComponent implements OnInit {
   }
 
   private getAirplaneOutGate(gate: Gate) {
-    const airplane = gate.airplane;
+    const airplane = Object.assign(new Airplane(), gate.airplane, {
+      takeoff: new Date()
+    });
+
+    this.gates = this.gates.filter(gate2 => gate2.airplane.id !== gate.airplane.id);
     gate.airplane = undefined;
     gate.state = true;
 
