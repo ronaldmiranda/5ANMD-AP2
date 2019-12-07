@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Airplane } from './airplane.model';
-import { Gate } from './gate.model';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +10,10 @@ export class AppComponent implements OnInit {
   public airplanes = [];
 
   public gates = [
-    new Gate({ id: 1, state: true, airplane: undefined }),
-    new Gate({ id: 2, state: true, airplane: undefined }),
-    new Gate({ id: 3, state: true, airplane: undefined }),
-    new Gate({ id: 4, state: true, airplane: undefined }),
+    { id: 1, state: true, airplane: undefined },
+    { id: 2, state: true, airplane: undefined },
+    { id: 3, state: true, airplane: undefined },
+    { id: 4, state: true, airplane: undefined },
   ];
 
   totalAirplanes = [];
@@ -82,7 +81,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  private getAirplaneOutGate(gate: Gate) {
+  private getAirplaneOutGate(gate) {
     const airplane = gate.airplane;
     gate.airplane = undefined;
     gate.state = true;

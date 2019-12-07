@@ -1,10 +1,23 @@
-<div class="inicio">
-  <div class="">
-    <button class="btn btn-default" (click)="gerarList()">Gerar</button>
+<div class="inicio col-12">
 
-    <div *ngFor="let airplane of airplanes">{{ airplane | json}}</div>
+  <div class="col-6">
+    <button class="btn btn-default p-2" (click)="gerarList(); canContinue = !canContinue">
+      {{canContinue ? 'Gerar' : 'Pausar'}}
+    </button>
+
+    <div class="p-2">
+      <div class="col-4">
+        <ul *ngFor="let airplane of airplanes">
+          <li class="list-group-item">
+            <span class="d-block">{{ airplane | json}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
 
   </div>
- 
 
+  <div class="col-6">
+    <span>Total de aviões: {{totalAirplanes.length}}</span>
+  </div>
 </div>
