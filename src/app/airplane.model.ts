@@ -4,7 +4,7 @@ export class Airplane {
     takeoff?: Date;
     landing?: Date;
 
-    constructor(init?: Partial<Airplane>) {
+    constructor(init: Partial<Airplane>) {
         Object.assign(this, init);
     }
 }
